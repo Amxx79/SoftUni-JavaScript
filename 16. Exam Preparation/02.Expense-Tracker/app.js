@@ -3,10 +3,13 @@ window.addEventListener("load", solve);
 function solve() {
 
     const ulListPreviewElement = document.getElementById('preview-list');
+    const expenseListElement = document.getElementById('expenses-list');
 
     let expenseTypeElement = document.getElementById('expense');
     let amountElement = document.getElementById('amount');
     let dataElement = document.getElementById('date');
+    
+    const deleteButtonElement = document.querySelector('#expenses button');
 
     const addButtonElement = document.getElementById('add-btn');
 
@@ -60,10 +63,21 @@ function solve() {
             amountElement.value = amountParagraph.textContent.substring(8, amountParagraph.textContent.length - 1);
             dataElement.value = dateParagraph.textContent.substring(6);
 
+            ulListPreviewElement.innerHTML = '';
+            addButtonElement.removeAttribute('disabled');
+        })
+
+
+        okButton.addEventListener('click', () => {
+            addButtonElement.removeAttribute('disabled');
+            ulListPreviewElement.innerHTML = '';
+            const listItemParrentsButton = listItemHolder.querySelector('.buttons');
+            listItemParrentsButton.remove();
+            expenseListElement.appendChild(listItemHolder);
+        })
+
+        deleteButtonElement.addEventListener('click', () => {
+            expenseListElement.innerHTML = '';
         })
     })
-
-
-
 }
-//TODO
